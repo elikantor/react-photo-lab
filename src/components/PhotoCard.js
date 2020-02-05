@@ -1,15 +1,16 @@
 import React from 'react'
 
-const PhotoCard = () => {
+const PhotoCard = (props) => {
     return (
         <div className="column">
             <div className="ui fluid card">
                 <div className="image">
-                    <img src={"https://picsum.photos/id/0/5616/3744"}/>
+                    <img alt="" src={props.photo.download_url}/>
                 </div>
                 <div className="content">
-                    <div className="header">Elyse</div>
-                    <button className="ui button blue">Add To Favorites</button>
+                    <div className="header">{props.photo.author}</div>
+                    {props.favoriteContainer === "fav" ? <button onClick={()=>props.remove(props.photo)} className="ui button blue">Remove from Favorites</button> :
+                    <button disabled={props.favorites.includes(props.photo)} onClick={()=>props.addToFavorites(props.photo)} className="ui button blue">{props.favorites.includes(props.photo) ? "Already in Favorites" : "Add To Favorites"}</button>}
                 </div>
             </div>
         </div>
